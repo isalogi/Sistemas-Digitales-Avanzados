@@ -1,0 +1,16 @@
+Byte 0  Header(0x7E)
+Byte 1  LM35(Temperature sensor)
+Byte 2  Checksum
+
+Pasos
+
+Leer entrada analoga del sensor de temperatura
+Aplicar la formula de teperetura tempC = (5.0 * tempC * 100.0)/1024.0;
+Armar el buffer
+Escribir el buffer en el serial
+Verificar que el serial este disponibles
+leer el serial
+detectar el header del buffer
+Sacar los datos de buffer
+prender el rgb dependiendo de una temperatura 
+0 a 10 azul 10 a 20 amarillo 20 a 30 naranja 30 en adelante rojo

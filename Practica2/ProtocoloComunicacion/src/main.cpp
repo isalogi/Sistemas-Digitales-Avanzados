@@ -5,18 +5,39 @@ Protocol protocol;
 
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin(115200);
+    pinMode(11, OUTPUT);
+    pinMode(10, OUTPUT);
+    pinMode(9, OUTPUT);
 }
 
 void loop()
 {
+
+    int analogTemp = protocol.analogInpRead(0);
+    uint8_t temp = protocol.calcTemp(analogTemp);
+    protocol.initBuffer(temp);
+
+    Serial.print("Input: ");
+    Serial.println(protocol.inpBuffer[1]);
+
+    Serial.write(protocol.inpBuffer, 3);
+    delay(10000);
+
     if (Serial.available())
     {
-        int analogTemp = protocol.analogInpRead(0);
-        uint8_t temp = protocol.calcTemp(analogTemp);
-        protocol.initBuffer(temp);
+        uint8_t readInp = Serial.read();
 
-        Serial.write(protocol.buffer, 3);
-        delay(100);
+        if (protocol.isHeader(readInp))
+        {
+            if (!protocol.firstHeader)
+            {
+                protocol.firstHeader = 1;
+                protocol.readCounter = 0;
+            }
+        }
+        protocol.addData(readInp);
+
+        delay(10000);
     }
 }

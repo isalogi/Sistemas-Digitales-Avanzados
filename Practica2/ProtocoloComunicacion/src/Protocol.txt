@@ -9,6 +9,7 @@ Aplicar la formula de teperetura tempC = (5.0 * tempC * 100.0)/1024.0;
 Armar el buffer
 Escribir el buffer en el serial
 Verificar que el serial este disponibles
+
 leer el serial
 detectar el header del buffer
 Sacar los datos de buffer

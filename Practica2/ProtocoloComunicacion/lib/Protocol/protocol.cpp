@@ -18,12 +18,26 @@ uint8_t Protocol::calcTemp(int analogTemp)
 
 void Protocol::initBuffer(uint8_t temp)
 {
-    this->buffer[0]=this->header;
-    this->buffer[1]=temp;
-    this->buffer[2]=this->calcChecksum(temp);
+    this->inpBuffer[0] = this->header;
+    this->inpBuffer[1] = temp;
+    this->inpBuffer[2] = this->calcChecksum(temp);
 }
 
-  uint8_t Protocol::calcChecksum (uint8_t inpChecksum)
-  {
-      return this->header + inpChecksum;
-  }
+uint8_t Protocol::calcChecksum(uint8_t inpChecksum)
+{
+    return this->header + inpChecksum;
+}
+
+bool Protocol::isHeader(uint8_t inpData)
+{
+    return inpData == this->header;
+}
+
+void Protocol::addData(uint8_t inpData)
+{
+    if (this->readCounter <= 3)
+    {
+        this->outBuffer[this->readCounter] = inpData;
+        this->readCounter++;
+    }
+}

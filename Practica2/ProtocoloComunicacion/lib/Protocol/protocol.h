@@ -7,17 +7,17 @@ class Protocol
 {
 public:
   Protocol();
+  bool firstHeader;
+  void addData(uint8_t inpData);
   void initBuffer(uint8_t temp);
-  uint8_t calcTemp(int analogTemp);
   void clearBuffer();
   bool isHeader(uint8_t inpData);
   int analogInpRead(uint8_t inpIndex);
   uint8_t calcChecksum(uint8_t inpChecksum);
   uint8_t inpBuffer[3];
   uint8_t outBuffer[3];
-  bool firstHeader;
+  uint8_t calcTemp(int analogTemp);
   uint8_t readCounter;
-  void addData(uint8_t inpData);
 
 private:
   uint8_t checkSum(uint8_t checkData);

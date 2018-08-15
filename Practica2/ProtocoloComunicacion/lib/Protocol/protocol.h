@@ -10,7 +10,7 @@ public:
   bool firstHeader;
   void addData(uint8_t inpData);
   void initBuffer(uint8_t temp);
-  void rgb(uint8_t r,uint8_t g,uint8_t b);
+  void rgb(uint8_t temp);
   void clearBuffer();
   bool isHeader(uint8_t inpData);
   int analogInpRead(uint8_t inpIndex);

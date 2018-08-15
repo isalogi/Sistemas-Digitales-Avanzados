@@ -41,3 +41,25 @@ void Protocol::addData(uint8_t inpData)
         this->readCounter++;
     }
 }
+
+void Protocol::rgb(uint8_t temp)
+{
+    if (temp >=0 && temp <= 20)
+    {
+        analogWrite(11, 255);
+        analogWrite(10, 0);
+        analogWrite(9, 0);
+    }
+    else if (temp >=20 && temp <= 30)
+    {
+        analogWrite(11, 0);
+        analogWrite(10, 255);
+        analogWrite(9, 0);
+    }
+    else
+    {
+        analogWrite(11, 0);
+        analogWrite(10, 0);
+        analogWrite(9, 255);
+    }
+}

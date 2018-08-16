@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <protocol.h>
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(4, 5);
+SoftwareSerial mySerial(6, 7);
 
 Protocol protocol;
 
@@ -20,18 +20,15 @@ void setup()
 
 void loop()
 {
-    if (mySerial.available())
-    {
-        int analogTemp = protocol.analogInpRead(0);
-        uint8_t temp = protocol.calcTemp(analogTemp);
-        protocol.initBuffer(temp);
-        Serial.write(protocol.inpBuffer, 3);
-        delay(10000);
-    }
+    int analogTemp = protocol.analogInpRead(0);
+    uint8_t temp = protocol.calcTemp(analogTemp);
+    protocol.initBuffer(temp);
+    Serial.write(protocol.inpBuffer,3);
+    delay(10000);
 
     if (Serial.available() > 0)
     {
-        uint8_t readInp = mySerial.read();
+        uint8_t readInp = Serial.read();
 
         if (protocol.isHeader(readInp))
         {
@@ -47,7 +44,7 @@ void loop()
         if (protocol.readCounter == 3)
         {
             protocol.rgb(protocol.outBuffer[1]);
-            protocol.clearBuffer;
+            mySerial.flush();
         }
     }
 }

@@ -11,7 +11,6 @@ public:
   void addData(uint8_t inpData);
   void initBuffer(uint8_t temp);
   void rgb(uint8_t temp);
-  void clearBuffer();
   bool isHeader(uint8_t inpData);
   int analogInpRead(uint8_t inpIndex);
   uint8_t calcChecksum(uint8_t inpChecksum);

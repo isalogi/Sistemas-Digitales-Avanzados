@@ -1,36 +1,38 @@
 #include <Arduino.h>
 #include "protocol.h"
-#include "serialUtil.h"
 
 Protocol::Protocol()
 {
 }
 
-void Protocol::createBuffer(Stream *stream)
+void Protocol::Read(Stream *stream, const int timeout)
 {
-    String inpString = SerialUtil::Read(stream,2000);
+    uint8_t tempData[3];
 
-    String inpHeader = "";
-    String inpPin = "";
-    String inpSpeed = "";
-
-    if (inpString.length() >= 6)
+    unsigned long int time = millis() + timeout;
+    while (time > millis())
     {
-        inpHeader = inpString.substring(0, 3);
-        inpPin = inpString.substring(4, 5);
+        while (stream->available())
+        {
+            uint8_t c = stream->read();
+            if (c == this->header)
+            {
+                stream->readBytes(tempData, 3);
+                this->buffer[0] = c;
+                this->buffer[1] = tempData[0];
+                this->buffer[2] = tempData[1];
+                this->buffer[3] = tempData[2];
+            }
+        }
     }
+}
 
-    if (inpString.length() == 8)
-    {
-        inpSpeed = inpString.substring(6, 7);
-    }
+uint8_t Protocol::createChecksum(uint8_t* inpBuffer)
+{
+    return inpBuffer[0] + inpBuffer[1] + inpBuffer[2];
+}
 
-    else if (inpString.length() == 9)
-    {
-        inpSpeed = inpString.substring(6, 8);
-    }
-    
-    Serial.println(inpHeader);
-    Serial.println(inpPin);
-    Serial.println(inpSpeed);
+bool Protocol::compareChecksum(uint8_t inpChecksum)
+{
+    return this->buffer[3] == inpChecksum;
 }

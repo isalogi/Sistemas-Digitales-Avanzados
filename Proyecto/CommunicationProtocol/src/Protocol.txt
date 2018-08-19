@@ -3,3 +3,4 @@ Byte 1 ID Ultrasonic (pin)
 Byte 2 Value
 Byte 3 Checksum
 
+0x7e04

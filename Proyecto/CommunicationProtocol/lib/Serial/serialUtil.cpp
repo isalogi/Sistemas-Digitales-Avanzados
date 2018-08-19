@@ -5,7 +5,6 @@ String SerialUtil::Read(Stream *stream, const int timeout)
 {
     String response = "";
     unsigned long int time = millis() + timeout;
-
     while (time > millis())
     {
         while (stream->available())
@@ -13,7 +12,6 @@ String SerialUtil::Read(Stream *stream, const int timeout)
             char c = stream->read();
             response += c;
         }
+        return response;
     }
-
-    return response;
 }

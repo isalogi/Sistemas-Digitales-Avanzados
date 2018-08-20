@@ -14,7 +14,7 @@ public:
   uint8_t getData(uint8_t pin);
 
 
-  uint8_t buffer[4];
+  uint8_t buffer[5];
 
 private:
   const uint8_t header = 0x7e;

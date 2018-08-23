@@ -1,0 +1,28 @@
+{
+  "name": "NodeJsSerialClient",
+  "version": "1.0.0",
+  "description": "Cliente Node Js para controlar Arduino",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isalogi/Sistemas-Digitales-Avanzados.git"
+  },
+  "keywords": [
+    "serial",
+    "driver",
+    "arduino"
+  ],
+  "author": "ilopezg1@eafit.edu.co",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isalogi/Sistemas-Digitales-Avanzados/issues"
+  },
+  "homepage": "https://github.com/isalogi/Sistemas-Digitales-Avanzados/blob/master/readme.md",
+  "dependencies": {
+    "serialport": "^6.2.2"
+  }
+}

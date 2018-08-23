@@ -15,6 +15,8 @@ void Protocol::Read(Stream *stream, const int timeout)
         while (stream->available())
         {
             uint8_t c = stream->read();
+            
+             stream->print(c);
             if (c == this->header)
             {
                 stream->readBytes(tempData, 4);

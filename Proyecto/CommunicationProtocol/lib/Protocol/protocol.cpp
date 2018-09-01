@@ -5,7 +5,7 @@ Protocol::Protocol()
 {
 }
 
-void Protocol::Read(Stream *stream, const int timeout)
+void Protocol::read(Stream *stream, const int timeout)
 {
     uint8_t tempData[4];
 
@@ -15,8 +15,8 @@ void Protocol::Read(Stream *stream, const int timeout)
         while (stream->available())
         {
             uint8_t c = stream->read();
-            
-             stream->print(c);
+
+            stream->write(c);
             if (c == this->header)
             {
                 stream->readBytes(tempData, 4);
@@ -38,4 +38,10 @@ uint8_t Protocol::createChecksum(uint8_t *inpBuffer)
 bool Protocol::compareChecksum(uint8_t inpChecksum)
 {
     return this->buffer[4] == inpChecksum;
+}
+
+void Protocol::rewriteBuffer(uint8_t data)
+{
+    this->buffer[3] = data;
+    this->buffer[4] = createChecksum(buffer);
 }

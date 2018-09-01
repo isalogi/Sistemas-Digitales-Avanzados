@@ -1,6 +1,22 @@
 Byte 0 Header
-Byte 1 ID Ultrasonic (pin)
-Byte 2 Value
-Byte 3 Checksum
+Byte 1 Actuator/Sensor (0->Sensor, 1->Actuator)
+Byte 2 ID Ultrasonic (pin) 
+Byte 3 Value (set or get) set->send ok, get->send data with protocol
+Byte 4 Checksum
 
-0x7e04
+-Debo organizar que cuando envie distancia la mande con el protocolo.
+-cuando se hace un set a un actuador tambien debe mandar como un ok con el protocolo si fue exitoso.
+-leer en node js si los datos los envian bien y ahi si imprimir el ok set y la distancia.
+-parser = new ByteLength({ length: 1 }); es un machetazo
+-Tratar de hacer que pueda ponerle la longitud para enviar varias instrucciones
+
+byte Header
+byte longitud
+byte actuador/Sensor
+byte ID
+byte payload
+byte Checksum
+
+Debo hacer un promedio de la distancia para saber si se debe enviar alerta.
+
+

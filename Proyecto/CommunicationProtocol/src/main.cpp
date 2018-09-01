@@ -26,7 +26,7 @@ void setup()
 void loop()
 {
     //leemos los datos que nos llegan en el otro serial
-    protocol.Read(&Serial, 1000);
+    protocol.read(&Serial, 1000);
 
     //calculamos el checksum con los datos recividos
     uint8_t inpChecksum = protocol.createChecksum(protocol.buffer);
@@ -34,9 +34,9 @@ void loop()
     //comparamos el checksum que me llegó vs el que construí
     if (protocol.compareChecksum(inpChecksum))
     {
+        
         if (protocol.buffer[1] == 1) //actuador o sensor
         {
-
             switch (protocol.buffer[2])
             {
             case 6:
@@ -66,11 +66,19 @@ void loop()
                 duration = pulseIn(echo, HIGH); //medimos el tiempo entre pulsos, en microsegundos
 
                 distanceCm = duration * 10 / 292 / 2; //convertimos a distancia, en cm
-
-                Serial.write("Distancia: ");
-                Serial.write(distanceCm);
+                //re-escribo la distancia en el payload
+                protocol.rewriteBuffer(distanceCm);
+                //escribo al pc la distancia mediante el protocolo
+                Serial.write(protocol.buffer,5);
+                /*
+                for(uint8_t i = 0; i < 5; i++)
+                {
+                    Serial.print(protocol.buffer[i]);
+                }
+                Serial.println();
+                
                 break;
-
+                */
             default:
 
                 break;

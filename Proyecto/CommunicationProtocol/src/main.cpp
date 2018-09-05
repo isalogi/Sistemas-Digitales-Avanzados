@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <protocol.h> // Solo uso comillas cuando estoy importando de lib en lib
+#include <Servo.h>
 
-uint8_t d1 = 4;
-uint8_t d2 = 5;
+Servo servoMotor;
 uint8_t pin = 6;
 uint8_t trig = 8;
 uint8_t echo = 12;
@@ -10,15 +10,9 @@ uint8_t echo = 12;
 Protocol protocol;
 void setup()
 {
-    pinMode(d1, OUTPUT);
-    pinMode(d2, OUTPUT);
-    pinMode(pin, OUTPUT);
+    servoMotor.attach(pin);
     pinMode(trig, OUTPUT);
     pinMode(echo, INPUT);
-
-    digitalWrite(d1, LOW);
-    digitalWrite(d2, LOW);
-    digitalWrite(pin, 0);
 
     Serial.begin(115200);
 }
@@ -34,15 +28,13 @@ void loop()
     //comparamos el checksum que me llegó vs el que construí
     if (protocol.compareChecksum(inpChecksum))
     {
-        
+
         if (protocol.buffer[1] == 1) //actuador o sensor
         {
             switch (protocol.buffer[2])
             {
             case 6:
-                digitalWrite(d1, HIGH);
-                digitalWrite(d2, LOW);
-                digitalWrite(protocol.buffer[2], protocol.buffer[3]);
+                servoMotor.write(protocol.buffer[3]);
                 break;
 
             default:
@@ -55,7 +47,7 @@ void loop()
             switch (protocol.buffer[2])
             {
             case 8:
-                long duration, distanceCm;
+                long duration;
 
                 digitalWrite(protocol.buffer[2], LOW); //para generar un pulso limpio ponemos a LOW 4us
                 delayMicroseconds(4);
@@ -65,11 +57,14 @@ void loop()
 
                 duration = pulseIn(echo, HIGH); //medimos el tiempo entre pulsos, en microsegundos
 
-                distanceCm = duration * 10 / 292 / 2; //convertimos a distancia, en cm
+                uint8_t distanceCm;
+                distanceCm= duration * 10 / 292 / 2; //convertimos a distancia, en cm
                 //re-escribo la distancia en el payload
-                protocol.rewriteBuffer(distanceCm);
+
+                uint8_t *outBuffer;
+                outBuffer = protocol.getOutBuffer(distanceCm, protocol.buffer[1], protocol.buffer[2]);
                 //escribo al pc la distancia mediante el protocolo
-                Serial.write(protocol.buffer,5);
+                Serial.write(outBuffer, 5);
                 /*
                 for(uint8_t i = 0; i < 5; i++)
                 {

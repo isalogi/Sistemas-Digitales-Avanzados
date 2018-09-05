@@ -32,7 +32,7 @@ void Protocol::read(Stream *stream, const int timeout)
 
 uint8_t Protocol::createChecksum(uint8_t *inpBuffer)
 {
-    return inpBuffer[0] + inpBuffer[1] + inpBuffer[2] + +inpBuffer[3];
+    return inpBuffer[0] + inpBuffer[1] + inpBuffer[2] + inpBuffer[3];
 }
 
 bool Protocol::compareChecksum(uint8_t inpChecksum)
@@ -40,8 +40,13 @@ bool Protocol::compareChecksum(uint8_t inpChecksum)
     return this->buffer[4] == inpChecksum;
 }
 
-void Protocol::rewriteBuffer(uint8_t data)
+uint8_t *Protocol::getOutBuffer(uint8_t data, uint8_t type, uint8_t pin)
 {
-    this->buffer[3] = data;
-    this->buffer[4] = createChecksum(buffer);
+    uint8_t outBuffer[5];
+
+    outBuffer[0] = this->header;
+    outBuffer[1] = type;
+    outBuffer[2] = pin;
+    outBuffer[3] = data;
+    outBuffer[4] = createChecksum(outBuffer);
 }

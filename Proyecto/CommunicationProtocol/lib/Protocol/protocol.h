@@ -9,7 +9,7 @@ public:
   Protocol(); //Lo primero que se ejecuta cuando creo una clase
   void sendData(uint8_t inpData, uint8_t pin);
   void read(Stream *stream, const int timeout);
-  void rewriteBuffer(uint8_t data);
+  uint8_t* getOutBuffer(uint8_t data, uint8_t type, uint8_t pin);
   bool compareChecksum(uint8_t inpChecksum);
   uint8_t createChecksum(uint8_t *inpBuffer);
 

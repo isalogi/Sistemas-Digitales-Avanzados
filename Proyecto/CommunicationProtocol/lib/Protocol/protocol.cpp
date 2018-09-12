@@ -16,7 +16,6 @@ void Protocol::read(Stream *stream, const int timeout)
         {
             uint8_t c = stream->read();
 
-            stream->write(c);
             if (c == this->header)
             {
                 stream->readBytes(tempData, 4);
@@ -42,11 +41,14 @@ bool Protocol::compareChecksum(uint8_t inpChecksum)
 
 uint8_t *Protocol::getOutBuffer(uint8_t data, uint8_t type, uint8_t pin)
 {
-    uint8_t outBuffer[5];
+    //se debe crear un nuevo vector con new para que la memoria de esta variable se mantenga, sino se pierde
+    uint8_t *outBuffer= new uint8_t[5];
 
     outBuffer[0] = this->header;
     outBuffer[1] = type;
     outBuffer[2] = pin;
     outBuffer[3] = data;
     outBuffer[4] = createChecksum(outBuffer);
+
+    return outBuffer;
 }

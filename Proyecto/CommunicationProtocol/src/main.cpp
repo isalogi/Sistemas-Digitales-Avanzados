@@ -19,69 +19,64 @@ void setup()
 
 void loop()
 {
-    //leemos los datos que nos llegan en el otro serial
-    protocol.read(&Serial, 1000);
-
-    //calculamos el checksum con los datos recividos
-    uint8_t inpChecksum = protocol.createChecksum(protocol.buffer);
-
-    //comparamos el checksum que me llegó vs el que construí
-    if (protocol.compareChecksum(inpChecksum))
+    if (Serial.available() > 0)
     {
+        //leemos los datos que nos llegan en el otro serial
+        protocol.read(&Serial, 1000);
 
-        if (protocol.buffer[1] == 1) //actuador o sensor
+        //calculamos el checksum con los datos recividos
+        uint8_t inpChecksum = protocol.createChecksum(protocol.buffer);
+
+        //comparamos el checksum que me llegó vs el que construí
+        if (protocol.compareChecksum(inpChecksum))
         {
-            switch (protocol.buffer[2])
+
+            if (protocol.buffer[1] == 1) //actuador o sensor
             {
-            case 6:
-                servoMotor.write(protocol.buffer[3]);
-                break;
+                switch (protocol.buffer[2])
+                {
+                case 6:
+                    servoMotor.write(protocol.buffer[3]);
+                    break;
 
-            default:
+                default:
 
-                break;
+                    break;
+                }
+            }
+            else
+            {
+                switch (protocol.buffer[2])
+                {
+                case 8:
+                    long duration;
+
+                    digitalWrite(protocol.buffer[2], LOW); //para generar un pulso limpio ponemos a LOW 4us
+                    delayMicroseconds(4);
+                    digitalWrite(protocol.buffer[2], HIGH); //generamos Trigger (disparo) de 10us
+                    delayMicroseconds(10);
+                    digitalWrite(protocol.buffer[2], LOW);
+
+                    duration = pulseIn(echo, HIGH); //medimos el tiempo entre pulsos, en microsegundos
+
+                    uint8_t distanceCm;
+                    distanceCm = duration * 10 / 292 / 2; //convertimos a distancia, en cm
+                    //re-escribo la distancia en el payload
+
+                    uint8_t *outBuffer;
+                    outBuffer = protocol.getOutBuffer(distanceCm, protocol.buffer[1], protocol.buffer[2]);
+                    //escribo al pc la distancia mediante el protocolo
+                    Serial.write(outBuffer, 5);
+
+                default:
+
+                    break;
+                }
             }
         }
         else
         {
-            switch (protocol.buffer[2])
-            {
-            case 8:
-                long duration;
-
-                digitalWrite(protocol.buffer[2], LOW); //para generar un pulso limpio ponemos a LOW 4us
-                delayMicroseconds(4);
-                digitalWrite(protocol.buffer[2], HIGH); //generamos Trigger (disparo) de 10us
-                delayMicroseconds(10);
-                digitalWrite(protocol.buffer[2], LOW);
-
-                duration = pulseIn(echo, HIGH); //medimos el tiempo entre pulsos, en microsegundos
-
-                uint8_t distanceCm;
-                distanceCm= duration * 10 / 292 / 2; //convertimos a distancia, en cm
-                //re-escribo la distancia en el payload
-
-                uint8_t *outBuffer;
-                outBuffer = protocol.getOutBuffer(distanceCm, protocol.buffer[1], protocol.buffer[2]);
-                //escribo al pc la distancia mediante el protocolo
-                Serial.write(outBuffer, 5);
-                /*
-                for(uint8_t i = 0; i < 5; i++)
-                {
-                    Serial.print(protocol.buffer[i]);
-                }
-                Serial.println();
-                
-                break;
-                */
-            default:
-
-                break;
-            }
+            Serial.println("Datos corruptos");
         }
-    }
-    else
-    {
-        Serial.println("Datos corruptos");
     }
 }

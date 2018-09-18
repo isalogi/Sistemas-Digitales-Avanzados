@@ -34,7 +34,7 @@
   width: 50px;
 
 }
-/*Medium devices (tablets, less than 992px)*/
+/*Medium devices (tablets, less than 992px poner)*/
 @media (max-width: 991.98px) {
   .header{
     height: 130px;
@@ -68,6 +68,7 @@
   }
   .footer{
     height: 25px;
+    /*Para que no me salga un pezado mal*/
     bottom: 0;
   }
   .content{

@@ -1,0 +1,245 @@
+/*Carousel*/
+
+.slider {
+	position: fixed;
+	top: 80px;
+	height: 100%;
+	width: 100%;
+	z-index: 5;
+}
+
+.absolute__img {
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	margin-left: -49px;
+	z-index: 99;
+}
+
+.slider .btn {
+	margin: 0px 15px 0 0;
+}
+
+.carousel-caption {
+	top: 50%;
+	margin-top: -250px;
+	font-size: 24px;
+	text-align: left;
+	color: #fff;
+	text-transform: none;
+}
+
+.carousel-caption h1 {
+	font-size: 60px;
+	line-height: 60px;
+	text-transform: lowercase;
+	font-weight: bold;
+	text-align: left;
+	color: #fff;
+}
+
+.carousel-caption p {
+	text-shadow: 1px 1px 3px #666666;
+	text-align: left;
+	color: #e0e0e0;
+	font-size: 18px;
+	text-transform: none;
+	font-weight: 400;
+	margin: 35px 0 20px 0;
+}
+
+.carousel-control {
+	background: none;
+	opacity: 1;
+	position: absolute;
+	top: 0%;
+	margin-top: 0px;
+	-moz-opacity: 1;
+}
+
+.carousel-control span {
+	position: absolute;
+	top: 50%;
+	margin-top: -70px;
+}
+
+.carousel-control .carousel-control-left {
+	background: url('../images/carousel/prev.png') no-repeat;
+	width: 57px;
+	height: 57px;
+	left: 25px;
+}
+
+.carousel-control .carousel-control-right {
+	background: url('../images/carousel/next.png') no-repeat;
+	width: 57px;
+	height: 57px;
+	right: 25px;
+}
+
+.carousel-control .carousel-control-left:hover {
+	background: url('../images/carousel/prev_a.png') no-repeat;
+}
+
+.carousel-control .carousel-control-right:hover {
+	background: url('../images/carousel/next_a.png') no-repeat;
+}
+
+.boxess .carousel-control .carousel-control-left {
+	top: 50%;
+	margin-top: -7px;
+}
+
+.boxess .carousel-control .carousel-control-right {
+	top: 50%;
+	margin-top: -7px;
+}
+
+.boxess .carousel-caption {
+	top: 50%;
+	margin-top: -145px;
+}
+
+.boxess {
+	position: relative;
+	height: auto;
+	top: 0;
+	background: #333;
+}
+
+.boxess .carousel-caption h1 {
+	font-size: 40px;
+	line-height: 40px;
+}
+
+@media(max-width:1600px) {
+	.carousel-caption h1 {
+		font-size: 40px;
+		line-height: 50px;
+		padding: 40px 0;
+	}
+}
+
+@media(max-width:1310px) {
+	.carousel-caption {
+		font-size: 14px;
+		top: 55%;
+	}
+	.carousel-caption h1 {
+		font-size: 30px;
+		line-height: 40px;
+	}
+	.slider .btn {
+		margin: 0 10px;
+	}
+	.carousel-caption p {
+		margin: 30px 0;
+	}
+	.navbar-default .navbar-nav>li {
+		margin-left: 10px;
+	}
+}
+
+@media(max-width:990px) {
+	.carousel-caption {
+		font-size: 13px;
+		top: 50%;
+		margin-top: -110px;
+		left: 15%;
+		right: 15%;
+	}
+	.carousel-caption h1 {
+		font-size: 20px;
+		line-height: 30px;
+		margin-bottom: 0px;
+		padding: 5px 0;
+		background: none;
+	}
+	.carousel-caption p {
+		margin: 10px 0;
+	}
+	.boxess .carousel-caption h1 {
+		font-size: 20px;
+		line-height: 20px;
+	}
+	.carousel-control .carousel-control-left {
+		left: 5px;
+	}
+	.carousel-control .carousel-control-right {
+		right: 5px;
+	}
+	.carousel-control {
+		width: auto;
+	}
+	.boxess .carousel-control {
+		width: auto;
+		top: 50%;
+		margin-top: -27px;
+	}
+	.boxess .carousel-caption {
+		top: 50%;
+		margin-top: -80px;
+	}
+}
+
+@media(max-width:600px) {
+	.slider .btn {
+		display: none;
+	}
+}
+
+@media(max-width:440px) {
+	.carousel-caption {
+		display: none;
+	}
+}
+
+.carousel-fade .carousel-inner .item {
+	opacity: 0;
+	-webkit-transition-property: opacity;
+	transition-property: opacity;
+}
+
+.carousel-fade .carousel-inner .active {
+	opacity: 1;
+}
+
+.carousel-fade .carousel-inner .active.left, .carousel-fade .carousel-inner .active.right {
+	left: 0;
+	opacity: 0;
+	z-index: 1;
+}
+
+.carousel-fade .carousel-inner .next.left, .carousel-fade .carousel-inner .prev.right {
+	opacity: 1;
+}
+
+.carousel-fade .carousel-control {
+	z-index: 2;
+}
+
+.slider {
+	overflow: hidden;
+	max-width: 100%;
+}
+
+.carousel-control span {
+	margin-top: -40px;
+}
+
+@media(min-width:768px) and (max-width:991px) {
+	.slider {
+		position: absolute;
+	}
+	.carousel-caption {
+		top: 40%;
+	}
+	.carousel-caption a.btn {
+		display: none;
+	}
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+	min-width: 100%;
+	height: auto;
+}

@@ -5,40 +5,132 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta name="author" content="Cristina Giraldo">
+
+  <meta name="author" content="Isabel Cristiana">
   <link rel="icon" href="../../favicon.ico">
 
   <title>Dispensador de granos</title>
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/carousel.css">
 
 </head>
 
 <body>
 
-  <div class="container-fluid header">
+  <header>
+    <div class="container">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <h1 class="navbar-brand">
+            <a href="main.html">Dispensador de<span> granos</span></a>
+          </h1>
+          <a href="#" onClick="javascript.void()" class="submenu">Menus</a>
+        </div>
 
-    <nav class="navbar navbar-light bg-transparent">
-      <a class="navbar-brand logo" href="#">
-        <img src="../assets/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      </a>
-      <div>Dispensador de granos</div>
-    </nav>
-  </div>
+        <div class="menuBar">
+          <ul class="menu">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="dropdown"><a href="#">Consultar Datos</a>
+              <ul>
+                <li><a href="#">Ver datos</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <div class="container-fluid main">
-    <div class="container-fluid content"></div>
-  </div>
+  <section class="slider">
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+       
+        <!--
+           <div class="item">
+              <img data-src="../assets/images/slider1.jpg" alt="first slide" src="../assets/images/slider1.jpg">
+              <div class="container">
+                <div class="carousel-caption text-left">
+                  <h1 class="">What is Lorem Ipsum?</h1>
+                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</p>
+    
+                </div>
+              </div>
+            </div>
 
-  <div class="container-fluid footer">
-  </div>
+        -->
+         
+
+        <div class="item active">
+          <img data-src="../assets/images/slider3.jpg" alt="second slide" src="../assets/images/slider3.jpg">
+          <div class="container">
+            <div class="carousel-caption text-left">
+              <h1 class="">Justo rutrum venenatis. Mauris accumsan posuere mauris</h1>
+              <p>Sed et orci purus. Vestibulum molestie, dolor sit amet viverra facilisis, justo magna.</p>
+              <p>
+                <a class="btn btn-default btn-lg-round" href="#" role="button">Enviar datos</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon carousel-control-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon carousel-control-right"></span></a>
+    </div>
+  </section>
+
+  <section class="main_container">
+    <div class="row text-left headings no-margin">
+      <div class="container">
+        <div class="seper"></div>
+        <h1 class="page_title">Consulta aquí los datos generados por el, <span>Dispensador de </span> granos.</h1>
+        <p>Isa inventate aquí un texto querendon ajajajaja no se que poner.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Consultar Datos</a></p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h3>Acerca</h3>
+          <p>We strive to deliver a level of service that exceeds the expectations of our customers. <br />
+            <br />
+            If you have any questions about our products or services, please do not hesitate to contact us. We have
+            friendly, knowledgeable representatives available seven days a week to assist you.</p>
+        </div>
+        <div class="col-md-3">
+          <h3>Redes sociales</h3>
+          <p><span>Tweet</span> <a href="#">@You</a><br />
+            Etiam egestas, ipsum posuere accumsan sollicitudin, nulla mauris volutpat sem, sit amet rutrum risus. </p>
+          <p><span>Tweet</span> <a href="#">@You</a><br />
+            Quisque porta tellus vitae adipiscing molestie. Mauris et lacus blandit, malesuada.</p>
+        </div>
+
+
+      </div>
+    </div>
+  </footer>
+  <p class="text-center copyright">&copy; Copyright ABC Company. All Rights Reserved.</p>
 
   <script src="../assets/js/jquery-3.3.1.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script type="text/javascript">
+
+    $('.carousel').carousel({
+      interval: 3500, // in milliseconds
+      pause: 'true' // set to 'true' to pause slider on mouse hover
+    })
+
+  </script>
 </body>
 
 </html>

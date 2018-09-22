@@ -57,7 +57,7 @@ h3 {
 
 /*Buttons*/
 
-.seper {
+.line-orange {
 	border-top: 3px solid #e74c3c;
 	width: 60px;
 	display: block;
@@ -98,20 +98,17 @@ h3 {
 	color: #fff;
 }
 
-button.btn-primary:focus, .btn-default:focus {
-	outline: none;
-}
-
 .btn-lg {
 	width: 180px;
 }
 
 .btn-lg-round {
-	width: 180px;
-	height: 180px;
+	width: 160px;
+	height: 160px;
 	border-radius: 50%;
-	opacity: 0.5;
-	line-height: 170px;
+	opacity: 0.6;
+	line-height: 150px;
+	font-size: 20px;
 }
 
 .btn-lg-round:hover {
@@ -123,26 +120,31 @@ button.btn-primary:focus, .btn-default:focus {
 
 @-moz-keyframes spin {
 	100% {
-		-moz-transform: scale(0.8); /*rotate(360deg);*/
+		-moz-transform: scale(0.2);
+		/*rotate(360deg);*/
 	}
 }
 
 @-webkit-keyframes spin {
 	100% {
-		-webkit-transform: scale(0.8); /*rotate(360deg);*/
+		-webkit-transform: scale(0.2);
+		/*rotate(360deg);*/
 	}
 }
 
 @-o-keyframes spin {
 	100% {
-		-o-transform: scale(0.8); /*rotate(360deg);*/
+		-o-transform: scale(0.2);
+		/*rotate(360deg);*/
 	}
 }
 
 @keyframes spin {
 	100% {
-		-webkit-transform: scale(0.8); /*rotate(360deg);*/
-		transform: scale(0.8); /*rotate(360deg);*/
+		-webkit-transform: scale(0.2);
+		/*rotate(360deg);*/
+		transform: scale(0.2);
+		/*rotate(360deg);*/
 	}
 }
 
@@ -253,18 +255,6 @@ footer .text-center {
 	margin: 0;
 }
 
-@media(max-width:990px) {
-	.main_container h3.heading.white {
-		background: none;
-	}
-}
-
-@media(max-width:768px) {
-	h1.page_title {
-		padding: 20px 30px;
-	}
-}
-
 /*
 MENU CSS
 */
@@ -290,7 +280,6 @@ a.submenu:hover {
 }
 
 .menuBar {
-	padding-right: 15px;
 	float: right;
 }
 
@@ -373,7 +362,6 @@ a.submenu:hover {
 .menuBar li li a {
 	color: #2a2a2a;
 	border: 0;
-	font-size: 11px;
 	line-height: 11px;
 	padding: 15px 20px;
 	text-transform: uppercase;
@@ -386,6 +374,9 @@ a.submenu:hover {
 }
 
 @media(min-width:768px) {
+	h1.page_title {
+		padding: 20px 30px;
+	}
 	.menuBar, .menuBar ul {
 		display: block !important;
 	}
@@ -393,17 +384,18 @@ a.submenu:hover {
 		margin-left: -5px;
 	}
 	.menuBar li a {
-		font-size: 10px;
 		padding: 10px 12px;
 	}
 }
 
-@media(min-width:992px) {
+@media(min-width:990px) {
+	.main_container h3.heading.white {
+		background: none;
+	}
 	.menuBar li {
 		margin-left: 0;
 	}
 	.menuBar li a {
-		font-size: 11px;
 		padding: 10px 20px;
 	}
 }
@@ -412,9 +404,6 @@ a.submenu:hover {
 	.menuBar li {
 		margin-left: 0;
 	}
-	.menuBar li a {
-		font-size: 11px;
-	}
 }
 
 @media only screen and (max-width: 767px) {
@@ -422,7 +411,6 @@ a.submenu:hover {
 		display: block;
 	}
 	.menuBar {
-		padding: 10px 0 10px 0;
 		float: none;
 		max-height: 350px;
 		overflow: auto;
@@ -468,6 +456,13 @@ a.submenu:hover {
 	h1.page_title {
 		padding: 0;
 	}
+
+	.btn-lg-round {
+		width: 120px;
+		height: 120px;
+		line-height: 110px;
+		font-size: 15px;
+	}
 }
 
 @media(min-width:768px) and (max-width:991px) {
@@ -487,5 +482,11 @@ a.submenu:hover {
 	}
 	.main_container {
 		overflow: hidden;
+	}
+	.btn-lg-round {
+		width: 120px;
+		height: 120px;
+		line-height: 110px;
+		font-size: 15px;
 	}
 }

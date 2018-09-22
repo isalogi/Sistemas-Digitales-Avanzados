@@ -116,7 +116,6 @@
 	.carousel-caption h1 {
 		font-size: 40px;
 		line-height: 50px;
-		padding: 40px 0;
 	}
 }
 
@@ -129,11 +128,8 @@
 		font-size: 30px;
 		line-height: 40px;
 	}
-	.slider .btn {
-		margin: 0 10px;
-	}
 	.carousel-caption p {
-		margin: 30px 0;
+		margin: 10px 0;
 	}
 	.navbar-default .navbar-nav>li {
 		margin-left: 10px;
@@ -150,13 +146,12 @@
 	}
 	.carousel-caption h1 {
 		font-size: 20px;
-		line-height: 30px;
+		line-height: 20px;
 		margin-bottom: 0px;
 		padding: 5px 0;
-		background: none;
 	}
 	.carousel-caption p {
-		margin: 10px 0;
+		text-align: center;
 	}
 	.boxess .carousel-caption h1 {
 		font-size: 20px;
@@ -167,9 +162,6 @@
 	}
 	.carousel-control .carousel-control-right {
 		right: 5px;
-	}
-	.carousel-control {
-		width: auto;
 	}
 	.boxess .carousel-control {
 		width: auto;
@@ -182,14 +174,8 @@
 	}
 }
 
-@media(max-width:600px) {
-	.slider .btn {
-		display: none;
-	}
-}
-
 @media(max-width:440px) {
-	.carousel-caption {
+	.carousel-caption h1 {
 		display: none;
 	}
 }
@@ -197,6 +183,8 @@
 .carousel-fade .carousel-inner .item {
 	opacity: 0;
 	-webkit-transition-property: opacity;
+	-o-transition-property: opacity;
+	-moz-transition-property: opacity;
 	transition-property: opacity;
 }
 
@@ -233,9 +221,6 @@
 	}
 	.carousel-caption {
 		top: 40%;
-	}
-	.carousel-caption a.btn {
-		display: none;
 	}
 }
 

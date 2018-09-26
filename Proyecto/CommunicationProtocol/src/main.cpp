@@ -1,16 +1,18 @@
 #include <Arduino.h>
+#include<actuator.h>
 #include <protocol.h> // Solo uso comillas cuando estoy importando de lib en lib
 #include <Servo.h>
 
-Servo servoMotor;
 uint8_t pin = 6;
 uint8_t trig = 8;
 uint8_t echo = 12;
 
 Protocol protocol;
+Actuator actuator(pin);
+
 void setup()
 {
-    servoMotor.attach(pin);
+    actuator.servoMotor.attach(pin);
     pinMode(trig, OUTPUT);
     pinMode(echo, INPUT);
 
@@ -22,7 +24,7 @@ void loop()
     if (Serial.available() > 0)
     {
         //leemos los datos que nos llegan en el otro serial
-        protocol.read(&Serial, 1000);
+        protocol.read(&Serial, 300);
 
         //calculamos el checksum con los datos recividos
         uint8_t inpChecksum = protocol.createChecksum(protocol.buffer);
@@ -36,7 +38,7 @@ void loop()
                 switch (protocol.buffer[2])
                 {
                 case 6:
-                    servoMotor.write(protocol.buffer[3]);
+                    actuator.rotateServo(protocol.buffer);
                     break;
 
                 default:

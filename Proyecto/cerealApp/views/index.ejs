@@ -47,29 +47,21 @@
   <section class="slider">
     <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
-       
-        <!--
-           <div class="item">
-              <img data-src="../assets/images/slider1.jpg" alt="first slide" src="../assets/images/slider1.jpg">
-              <div class="container">
-                <div class="carousel-caption text-left">
-                  <h1 class="">What is Lorem Ipsum?</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</p>
-    
-                </div>
-              </div>
-            </div>
 
-        -->
-         
+
+        <div class="item">
+          <img data-src="../assets/images/grains-1.jpg" src="../assets/images/grains-1.jpg">
+          <div class="container">
+          </div>
+        </div>
 
         <div class="item active">
           <img data-src="../assets/images/slider3.jpg" alt="second slide" src="../assets/images/slider3.jpg">
           <div class="container">
             <div class="carousel-caption text-left">
-              <h1 class="">Justo rutrum venenatis. Mauris accumsan posuere mauris</h1>
+              <h1 class=""></h1>
               <p>
-                <a class="btn btn-default btn-lg-round" href="#" role="button">Enviar datos</a>
+                <a id="btn-send" class="btn btn-default btn-lg-round" href="#" role="button">Dispensar</a>
               </p>
             </div>
           </div>
@@ -84,38 +76,28 @@
     <div class="row text-left headings no-margin">
       <div class="container">
         <div class="line-orange"></div>
-        <h1 class="page_title">Consulta aquí los datos generados por el, <span>Dispensador de </span> granos.</h1>
-        <p>Click aquí para consultar los datos.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Consultar Datos</a></p>
+        <h1 class="page_title">"Haz de tu alimentación tu mejor <span>medicina" </span> - Hipócrates.</h1>
       </div>
     </div>
 
   </section>
-
 
   <footer>
     <div class="container">
       <div class="row">
         <div class="col-md-3">
           <h3>Acerca</h3>
-          <p>We strive to deliver a level of service that exceeds the expectations of our customers. <br />
+          <p>Dispensador automatico para cualquier tipo de granos<br />
             <br />
-            If you have any questions about our products or services, please do not hesitate to contact us. We have
-            friendly, knowledgeable representatives available seven days a week to assist you.</p>
-        </div>
-        <div class="col-md-3">
-          <h3>Redes sociales</h3>
-          <p><span>Tweet</span> <a href="#">@You</a><br />
-            Etiam egestas, ipsum posuere accumsan sollicitudin, nulla mauris volutpat sem, sit amet rutrum risus. </p>
-          <p><span>Tweet</span> <a href="#">@You</a><br />
-            Quisque porta tellus vitae adipiscing molestie. Mauris et lacus blandit, malesuada.</p>
+            Para nosotros es muy importante tu bienestar por eso nos esforzamos en que llevas una nutrición adecuada,
+            es la mejor inversión para tu cuerpo y mente.</p>
         </div>
 
 
       </div>
     </div>
   </footer>
-  <p class="text-center copyright">&copy; Copyright ABC Company. All Rights Reserved.</p>
+  <p class="text-center copyright">&copy; Copyright Isalogi Company. All Rights Reserved.</p>
 
   <script src="../assets/js/jquery-3.3.1.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
@@ -124,10 +106,22 @@
 
   <script type="text/javascript">
     $('.carousel').carousel({
-      interval: 3500,
+      interval: 300000,
       pause: 'true'
     })
   </script>
+
+  <script>
+    $(document).ready(function () {
+      
+      $("#btn-send").click(function () {
+        
+        $.post("http://localhost:8080/SendData", {  }, function (data) {
+        });
+      });
+    });
+  </script>
+
 </body>
 
 </html>

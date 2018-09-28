@@ -12,7 +12,8 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "jquery": "^3.3.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "serialport": "^6.2.2"
   },
   "devDependencies": {},
   "author": "Isabel Lopez",

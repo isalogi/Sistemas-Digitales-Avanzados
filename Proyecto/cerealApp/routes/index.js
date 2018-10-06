@@ -12,6 +12,7 @@ router.get('/', function (req, res) {
 
 router.post('/SendData', function (req, res) {
 	conn.sendData();
+	res.end();
 });
 
 module.exports = router;

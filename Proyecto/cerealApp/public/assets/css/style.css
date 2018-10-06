@@ -86,6 +86,10 @@ h3 {
 	opacity: 0.6;
 	line-height: 150px;
 	font-size: 20px;
+	position: absolute;
+	top: -150%;
+	right: 65%;
+
 }
 
 .btn-lg-round:hover {

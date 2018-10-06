@@ -60,9 +60,7 @@
           <div class="container">
             <div class="carousel-caption text-left">
               <h1 class=""></h1>
-              <p>
-                <a id="btn-send" class="btn btn-default btn-lg-round" href="#" role="button">Dispensar</a>
-              </p>
+
             </div>
           </div>
         </div>
@@ -72,10 +70,14 @@
     </div>
   </section>
 
+
   <section class="main_container">
     <div class="row text-left headings no-margin">
       <div class="container">
         <div class="line-orange"></div>
+        <p>
+          <a id="btn-send" class="btn btn-default btn-lg-round" href="#" role="button">Dispensar</a>
+        </p>
         <h1 class="page_title">"Haz de tu alimentación tu mejor <span>medicina" </span> - Hipócrates.</h1>
       </div>
     </div>
@@ -113,10 +115,12 @@
 
   <script>
     $(document).ready(function () {
-      
+
       $("#btn-send").click(function () {
-        
-        $.post("http://localhost:8080/SendData", {  }, function (data) {
+        $.post("http://localhost:8080/SendData", {}, function (data) {
+
+          
+
         });
       });
     });

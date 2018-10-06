@@ -1,7 +1,8 @@
 #include <Arduino.h>
-#include<actuator.h>
+#include <actuator.h>
 #include <protocol.h> // Solo uso comillas cuando estoy importando de lib en lib
 #include <Servo.h>
+#include <sensor.h>
 
 uint8_t pin = 6;
 uint8_t trig = 8;
@@ -9,6 +10,7 @@ uint8_t echo = 12;
 
 Protocol protocol;
 Actuator actuator(pin);
+Sensor sensor(trig,echo);
 
 void setup()
 {
@@ -38,7 +40,12 @@ void loop()
                 switch (protocol.buffer[2])
                 {
                 case 6:
-                    actuator.rotateServo(protocol.buffer);
+                    actuator.rotateServo(static_cast<int>(protocol.buffer[3]));
+                    
+                    uint8_t *outBuffer;
+                    outBuffer = protocol.getOutBuffer(0x01, protocol.buffer[1], protocol.buffer[2]);
+                    //escribo que ya realizo la tarea.
+                    Serial.write(outBuffer, 5);
                     break;
 
                 default:
@@ -51,7 +58,10 @@ void loop()
                 switch (protocol.buffer[2])
                 {
                 case 8:
+
+                    uint8_t distanceCm;
                     long duration;
+                    //duration=sensor.getValue();
 
                     digitalWrite(protocol.buffer[2], LOW); //para generar un pulso limpio ponemos a LOW 4us
                     delayMicroseconds(4);
@@ -61,8 +71,11 @@ void loop()
 
                     duration = pulseIn(echo, HIGH); //medimos el tiempo entre pulsos, en microsegundos
 
-                    uint8_t distanceCm;
-                    distanceCm = duration * 10 / 292 / 2; //convertimos a distancia, en cm
+
+                    distanceCm = duration * 10 / 292 / 2;
+
+
+                    //distanceCm = duration * 10 / 292 / 2; //convertimos a distancia, en cm
                     //re-escribo la distancia en el payload
 
                     uint8_t *outBuffer;

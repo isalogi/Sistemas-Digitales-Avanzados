@@ -17,7 +17,7 @@ class ProtocolParser extends Transform {
     _transform(chunk, encoding, callback) {
 
         var tempBuffer = Buffer.concat([this.buffer, chunk]);
-        var headerIndex = tempBuffer.indexOf(0x7E);
+        var headerIndex = tempBuffer.lastIndexOf(0x7E);
         //se calcula el pedazo del buffer que se puede obtener a patir de la posición del header
         //chekiar si la posicipin index + 5 existe, si existe ya puedo saber si esta lleno
         if (headerIndex != -1 && tempBuffer[headerIndex + 4] != undefined) {

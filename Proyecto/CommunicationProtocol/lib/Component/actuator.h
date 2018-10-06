@@ -11,8 +11,9 @@ public:
   Servo servoMotor;
 
   Actuator(uint8_t pin);
-  void rotateServo(uint8_t *buffer);
+  void rotateServo(int value);
 
 private:
+  uint8_t pin;
 };
 #endif

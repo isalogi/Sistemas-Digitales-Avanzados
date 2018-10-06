@@ -19,4 +19,4 @@ byte Checksum
 
 Debo hacer un promedio de la distancia para saber si se debe enviar alerta.
 
-
+[0x7e, 0x01, 0x06, 0xB4, 0x139];

@@ -8,7 +8,7 @@ Actuator::Actuator()
 void Actuator::rotateServo(int value)
 {
     uint8_t i;
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < 3; i++)
     {
         this->servoMotor.write(value);
         delay(1000);

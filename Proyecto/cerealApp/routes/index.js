@@ -25,9 +25,6 @@ conn.on('dataRecived', function (data) {
 		}
 		else if (data[1] == 0x01) {
 			if (data[3] == 0x01) {
-				Popup.alert({
-					content:'¡Mi labor aquí ha terminado!'
-				});
 				console.log('¡Mi labor aquí ha terminado!');
 			}
 		}

@@ -1,10 +1,8 @@
 #include <Arduino.h>
 #include "sensor.h"
 
-Sensor::Sensor(uint8_t trig, uint8_t echo)
+Sensor::Sensor()
 {
-    this->trig = trig;
-    this->echo = echo;
 }
 
 long Sensor::getValue()

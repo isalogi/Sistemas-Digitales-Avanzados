@@ -1,35 +1,30 @@
 var SerialPort = require('serialport')
 var ProtocolParser = require('./ProtocolParser')
+var Events = require('events');
 
-class Comunication {
+class Comunication extends Events.EventEmitter {
 
-  constructor() {
-    this.port = new SerialPort('COM5', {
-      baudRate: 115200
+  constructor(arg) {
+    super(arg);
+
+    this.port = new SerialPort(arg.port, {
+      baudRate: arg.baudRate
     });
 
-    this.comunicationOK=false;
     this.parser = this.port.pipe(new ProtocolParser());
-
-    this.parser.on('data', function (data) {
-      for (let i = 0; i < data.length; i++) {
-        console.log('Datos:' + data[i]);
-      }
-
-      if(data.length==5)
-      {
-        this.comunicationOK=true;
-      }
-    });
+    this._init();
   }
 
-  sendData() {
-    this.comunicationOK=false;
+  _init() {
+    var actualObject = this;
+    this.parser.on('data', function (data) {
+      actualObject.emit('dataRecived', data); //asociamos el evento a ser ejecutado cuando se reciban los datos
+    })
+  }
 
+  sendData(inputbuffer) {
     setTimeout(function (port) {
-      var frame = [0x7e, 0x01, 0x06, 0xB4, 0x139];
-      var buff = Buffer.from(frame);
-      port.write(buff)
+      port.write(inputbuffer)
     }, 2000, this.port);
   }
 }

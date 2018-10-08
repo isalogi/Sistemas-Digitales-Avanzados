@@ -7,14 +7,11 @@
 class Sensor
 {
 public:
-
-  Sensor(uint8_t trig, uint8_t echo);
+  Sensor();
   long getValue();
 
-private:
-
-uint8_t trig;
-uint8_t echo;
+  uint8_t trig;
+  uint8_t echo;
 
 };
 #endif

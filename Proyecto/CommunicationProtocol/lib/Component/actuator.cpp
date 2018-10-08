@@ -1,9 +1,8 @@
 #include <Arduino.h>
 #include "actuator.h"
 
-Actuator::Actuator(uint8_t pin)
+Actuator::Actuator()
 {
-    this->pin = pin;
 }
 
 void Actuator::rotateServo(int value)

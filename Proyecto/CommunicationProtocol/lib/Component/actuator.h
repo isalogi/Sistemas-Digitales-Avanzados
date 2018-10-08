@@ -10,10 +10,8 @@ class Actuator
 public:
   Servo servoMotor;
 
-  Actuator(uint8_t pin);
+  Actuator();
   void rotateServo(int value);
-
-private:
   uint8_t pin;
 };
 #endif

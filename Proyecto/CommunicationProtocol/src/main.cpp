@@ -4,18 +4,14 @@
 #include <Servo.h>
 #include <sensor.h>
 
-uint8_t pin = 6;
-uint8_t trig = 8;
 uint8_t echo = 12;
 
 Protocol protocol;
-Actuator actuator(pin);
-Sensor sensor(trig,echo);
+Actuator actuator;
+Sensor sensor;
 
 void setup()
 {
-    actuator.servoMotor.attach(pin);
-    pinMode(trig, OUTPUT);
     pinMode(echo, INPUT);
 
     Serial.begin(115200);
@@ -25,6 +21,7 @@ void loop()
 {
     if (Serial.available() > 0)
     {
+        uint8_t response;
         //leemos los datos que nos llegan en el otro serial
         protocol.read(&Serial, 300);
 
@@ -34,22 +31,20 @@ void loop()
         //comparamos el checksum que me llegó vs el que construí
         if (protocol.compareChecksum(inpChecksum))
         {
-
             if (protocol.buffer[1] == 1) //actuador o sensor
             {
                 switch (protocol.buffer[2])
                 {
                 case 6:
+
+                    response = 0x01; //ok motor se movio
+                    actuator.pin = protocol.buffer[2];
+                    actuator.servoMotor.attach(actuator.pin);
                     actuator.rotateServo(static_cast<int>(protocol.buffer[3]));
-                    
-                    uint8_t *outBuffer;
-                    outBuffer = protocol.getOutBuffer(0x01, protocol.buffer[1], protocol.buffer[2]);
-                    //escribo que ya realizo la tarea.
-                    Serial.write(outBuffer, 5);
+
                     break;
 
                 default:
-
                     break;
                 }
             }
@@ -58,36 +53,34 @@ void loop()
                 switch (protocol.buffer[2])
                 {
                 case 8:
+                    sensor.echo = echo;
+                    sensor.trig = protocol.buffer[2];
 
-                    uint8_t distanceCm;
+                    pinMode(sensor.trig, OUTPUT);
+
                     long duration;
-                    //duration=sensor.getValue();
-
-                    digitalWrite(protocol.buffer[2], LOW); //para generar un pulso limpio ponemos a LOW 4us
-                    delayMicroseconds(4);
-                    digitalWrite(protocol.buffer[2], HIGH); //generamos Trigger (disparo) de 10us
-                    delayMicroseconds(10);
-                    digitalWrite(protocol.buffer[2], LOW);
-
-                    duration = pulseIn(echo, HIGH); //medimos el tiempo entre pulsos, en microsegundos
-
-
-                    distanceCm = duration * 10 / 292 / 2;
-
+                    // Promedio de medidas del sensor de distancia
+                    int add;
+                    add=0;
+                    for (size_t i = 0; i < 4; i++)
+                    {
+                        duration = sensor.getValue();
+                        response= duration * 10 / 292 / 2;
+                        add+=response;
+                    }
+                    response = add/ 3;
 
                     //distanceCm = duration * 10 / 292 / 2; //convertimos a distancia, en cm
                     //re-escribo la distancia en el payload
-
-                    uint8_t *outBuffer;
-                    outBuffer = protocol.getOutBuffer(distanceCm, protocol.buffer[1], protocol.buffer[2]);
-                    //escribo al pc la distancia mediante el protocolo
-                    Serial.write(outBuffer, 5);
-
                 default:
-
                     break;
                 }
             }
+
+            uint8_t *outBuffer;
+            outBuffer = protocol.getOutBuffer(response, protocol.buffer[1], protocol.buffer[2]);
+            //escribo que ya realizo la tarea.
+            Serial.write(outBuffer, 5);
         }
         else
         {

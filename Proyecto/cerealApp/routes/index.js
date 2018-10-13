@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Comunication = require('../protocol/comunication');
-var flash = require('connect-flash');
-
-var app = express();
+var Repository = require('../dataBase/repository');
+var rep = new Repository();
 
 var conn = new Comunication({
 	port: 'COM5',
@@ -28,10 +27,18 @@ conn.on('dataRecived', function (data) {
 				var bufferActuator = Buffer.from(frame);
 				conn.sendData(bufferActuator);
 				console.log("Se estan acabando los granos");
+				rep.insertAlert({
+					Date: Date.now(),
+					Message: "Se estan acabando los granos"
+				});
 			}
 
 			else {
 				console.log("No hay granos");
+				rep.insertAlert({
+					Date: Date.now(),
+					Message: "No hay granos"
+				});
 			}
 		}
 		else if (data[1] == 0x01) {
@@ -47,6 +54,18 @@ router.get('/', function (req, res) {
 	res.render('../views/index');
 });
 
+router.get('/viewData',function(req,res){
+	res.render('../views/viewData');
+})
+
+router.get('/getData', function (req, res) {
+
+	rep.findAlert(function (docs) {
+		res.send(docs);
+	});
+
+});
+
 router.post('/dispence', function (req, res) {
 	var frame = [0x7e, 0x00, 0x08, 0x00, 0x86];
 	var bufferSensor = Buffer.from(frame);
@@ -56,3 +75,4 @@ router.post('/dispence', function (req, res) {
 });
 
 module.exports = router;
+

@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-
 var app = express();
 
 // set the view engine to ejs

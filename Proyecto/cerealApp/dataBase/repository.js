@@ -18,7 +18,6 @@ class Repository {
         // Use connect method to connect to the Server
         client.connect(function (err) {
             assert.equal(null, err);
-            console.log("Connected successfully to server");
 
             const db = client.db(dbName);
 
@@ -29,8 +28,6 @@ class Repository {
                 assert.equal(err, null);
                 assert.equal(1, result.result.n);
                 assert.equal(1, result.ops.length);
-
-                console.log("Inserted 1 alert into the collection");
 
                 onSucess(result);
                 client.close();
@@ -47,16 +44,11 @@ class Repository {
         client.connect(function (err) {
             assert.equal(null, err);
 
-            console.log("Connected successfully to server");
-
             const db = client.db(dbName);
             const collection = db.collection('alerts');
 
             collection.find({}).toArray(function (err, docs) {
                 assert.equal(err, null);
-
-                console.log("Found the following records");
-                console.log(docs)
 
                 onSucess(docs);
                 client.close();

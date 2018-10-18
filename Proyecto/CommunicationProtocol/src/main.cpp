@@ -60,16 +60,8 @@ void loop()
 
                     long duration;
                     // Promedio de medidas del sensor de distancia
-                    int add;
-                    add = 0;
-                    for (size_t i = 0; i < 4; i++)
-                    {
-                        duration = sensor.getValue();
-                        response = duration * 10 / 292 / 2;
-                        add += response;
-                    }
-                    response = add / 3;
-
+                    duration = sensor.getValue();
+                    response = duration * 10 / 292 / 2;
                     //distanceCm = duration * 10 / 292 / 2; //convertimos a distancia, en cm
                     //re-escribo la distancia en el payload
                 default:

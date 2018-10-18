@@ -23,13 +23,13 @@ conn.on('dataRecived', function (data) {
 				conn.sendData(bufferActuator);
 			}
 
-			else if (data[3] > 15 && data[3] < 20) {
+			else if (data[3] >= 15 && data[3] < 17) {
 				var frame = [0x7e, 0x01, 0x06, 0xB4, 0x139];
 				var bufferActuator = Buffer.from(frame);
 				conn.sendData(bufferActuator);
 				console.log("Se estan acabando los granos");
 				rep.insertAlert({
-					Date: Date.now(),
+					Date: new Date().toDateString,
 					Message: "Se estan acabando los granos"
 				},function(){});
 			}
@@ -37,7 +37,7 @@ conn.on('dataRecived', function (data) {
 			else {
 				console.log("No hay granos");
 				rep.insertAlert({
-					Date: Date.now(),
+					Date: new Date().toDateString(),
 					Message:"No hay granos"
 				},function(){});
 			}

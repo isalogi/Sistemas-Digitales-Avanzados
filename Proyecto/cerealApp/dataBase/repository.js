@@ -12,7 +12,7 @@ class Repository {
 
     }
 
-    insertAlert(alert,onSucess) {
+    insertAlert(alert, onSucess) {
 
         // Use connect method to connect to the Server
         client.connect(function (err) {
@@ -29,10 +29,9 @@ class Repository {
                 assert.equal(1, result.ops.length);
                 console.log("Inserted 1 alert into the collection");
                 onSucess(result);
+                client.close();
+
             });
-
-            client.close();
-
         });
 
     }
@@ -54,9 +53,8 @@ class Repository {
                 console.log(docs)
 
                 onSucess(docs);
+                client.close();
             });
-
-            client.close();
 
         });
 

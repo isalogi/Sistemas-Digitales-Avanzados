@@ -9,6 +9,7 @@ var conn = new Comunication({
 	baudRate: 115200
 });
 
+
 conn.on('dataRecived', function (data) {
 	for (let i = 0; i < data.length; i++) {
 		console.log('Datos:' + data[i]);
@@ -30,15 +31,15 @@ conn.on('dataRecived', function (data) {
 				rep.insertAlert({
 					Date: Date.now(),
 					Message: "Se estan acabando los granos"
-				});
+				},function(){});
 			}
 
 			else {
 				console.log("No hay granos");
 				rep.insertAlert({
 					Date: Date.now(),
-					Message: "No hay granos"
-				});
+					Message:"No hay granos"
+				},function(){});
 			}
 		}
 		else if (data[1] == 0x01) {

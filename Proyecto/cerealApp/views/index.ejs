@@ -73,6 +73,16 @@
   <section class="main_container">
     <div class="row text-left headings no-margin">
       <div class="container">
+          
+          <%if(mensaje && mensaje.length >0){%>
+            <div class="container">
+             <div class="alert alert-info" role="alert">
+                <%= mensaje %>
+             </div>
+            </div>
+            <%}%>
+
+
         <div class="line-orange"></div>
         <p>
           <a id="btn-send" class="btn btn-default btn-lg-round" href="#" role="button">Dispensar</a>

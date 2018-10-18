@@ -52,7 +52,7 @@ conn.on('dataRecived', function (data) {
 
 /* GET home page. */
 router.get('/', function (req, res) {
-	res.render('../views/index');
+	res.render('../views/index',{ message: req.flash('info') });
 });
 
 router.get('/viewData',function(req,res){
@@ -70,6 +70,8 @@ router.get('/getData', function (req, res) {
 router.post('/dispence', function (req, res) {
 	var frame = [0x7e, 0x00, 0x08, 0x00, 0x86];
 	var bufferSensor = Buffer.from(frame);
+
+	req.flash('info', 'Hola')
 
 	conn.sendData(bufferSensor);
 	res.end();

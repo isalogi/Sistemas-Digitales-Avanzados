@@ -63,7 +63,7 @@
   <section class="main_container">
     <div class="row text-left headings no-margin">
       <div class="container">
-      
+
       </div>
     </div>
 
@@ -97,11 +97,18 @@
 
         $('#data').DataTable({
           data: data,
+          responsive: true,
+          scrollX: true,
+          paging: true,
+          destroy: true,
+          'aaSorting': [],
+          'pageLength': 50,
+          'bLengthChange': false,
           columns: [
             {
               title: "Fecha",
               data: "Date",
-              "type": "date",
+              type: "date",
             },
             {
               title: "Mensaje",
